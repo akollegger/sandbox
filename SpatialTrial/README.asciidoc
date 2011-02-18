@@ -4,4 +4,13 @@ SpatialTrial
 A trial of Neo4jSpatial, using BDD (in ScalaTest) to explore the API and write
 the least amount of code possible to do something meaningful.
 
+Notes
+-----
+
+After some exploratory tests, link:SpatialTrial/src/test/scala/Neo4jSpatialSpec.scala
+attempts to create a location annotated node, then find it.
+
+Challenges started with identifying the minimal required dependencies and
+repositories. The link:SpatialTrial/project/build/SpatialTrialProject.scala
+sbt project file is the result. 
 
