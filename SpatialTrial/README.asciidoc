@@ -20,7 +20,7 @@ Running
 This project is written in scala and uses SBT. With scala and SBT installed,
 you can run the tests by executing:
 
-[source,bash]
+[source]
 ----
 sbt test
 ----
