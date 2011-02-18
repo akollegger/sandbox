@@ -1,7 +1,7 @@
 SpatialTrial
 ============
 
-A trial of Neo4jSpatial, using BDD (in ScalaTest) to explore the API and write
+A trial of Neo4j Spatial, using BDD (in ScalaTest) to explore the API and write
 the least amount of code possible to do something meaningful.
 
 Notes
@@ -10,9 +10,31 @@ Notes
 After some exploratory tests, link:SpatialTrial/src/test/scala/Neo4jSpatialSpec.scala[]
 attempts to create a location annotated node, then find it.
 
+The exploration started with the assumption that I know how to create a Node,
+and that I could use Neo4j Spatial to place that Node at a location. Along the
+way, I presumed to configure as little as possible, relying on sensible default
+behavior.
+
+1. Create Node
+2. Create SpatialDatabaseService
+3. Place the Node at a location
+4. Look for the Node in space
+
 Challenges started with identifying the minimal required dependencies and
 repositories. The link:SpatialTrial/project/build/SpatialTrialProject.scala[]
 sbt project file is the result. 
+
+Annotating a Node with location information required a lot of work. Lots of 
+prepatory classes to create, then investigative work to figure out what the
+default "wkb" and "bbox" properties were, then how to create them.
+
+The (possibly unfair) point of comparison I was using is the MongoDB Geospatial
+page, which is dirt simple. http://www.mongodb.org/display/DOCS/Geospatial+Indexing
+
+At the moment, Neo4j-Spatial is very a-priori presumptive -- it expects you to
+know what you're doing and why you're doing it. The complexity could be mitigated
+by altering some of the default assumptions (implications of creating a class
+using the no-arg contructor) and adding some friendly wrappers/helpers.
 
 Running
 -------
