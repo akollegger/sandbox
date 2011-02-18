@@ -7,11 +7,11 @@ the least amount of code possible to do something meaningful.
 Notes
 -----
 
-After some exploratory tests, link:SpatialTrial/src/test/scala/Neo4jSpatialSpec.scala
+After some exploratory tests, link:SpatialTrial/src/test/scala/Neo4jSpatialSpec.scala[]
 attempts to create a location annotated node, then find it.
 
 Challenges started with identifying the minimal required dependencies and
-repositories. The link:SpatialTrial/project/build/SpatialTrialProject.scala
+repositories. The link:SpatialTrial/project/build/SpatialTrialProject.scala[]
 sbt project file is the result. 
 
 Running
@@ -20,8 +20,10 @@ Running
 This project is written in scala and uses SBT. With scala and SBT installed,
 you can run the tests by executing:
 
-[source, Bash]
+[source, bash]
+---
 sbt test
+---
 
 References
 ----------
