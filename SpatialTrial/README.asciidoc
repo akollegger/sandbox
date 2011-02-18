@@ -14,3 +14,18 @@ Challenges started with identifying the minimal required dependencies and
 repositories. The link:SpatialTrial/project/build/SpatialTrialProject.scala
 sbt project file is the result. 
 
+Running
+-------
+
+This project is written in scala and uses SBT. With scala and SBT installed,
+you can run the tests by executing:
+
+[source, Bash]
+sbt test
+
+References
+----------
+
+* http://code.google.com/p/simple-build-tool/[SBT]
+* http://www.scala-lang.org/[Scala Language]
+
