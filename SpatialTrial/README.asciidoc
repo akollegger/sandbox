@@ -1,0 +1,7 @@
+SpatialTrial
+============
+
+A trial of Neo4jSpatial, using BDD (in ScalaTest) to explore the API and write
+the least amount of code possible to do something meaningful.
+
+

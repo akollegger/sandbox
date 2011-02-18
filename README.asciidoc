@@ -1,0 +1,7 @@
+Sandbox Projects
+================
+
+This is a collection of toy projects -- explorations, spike solutions, etc. --
+that seem shareable.
+
+
