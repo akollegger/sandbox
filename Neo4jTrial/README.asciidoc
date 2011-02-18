@@ -1,0 +1,21 @@
+Neo4jTrial
+============
+
+A trial of Neo4j, using BDD (in ScalaTest) to explore the API and write
+the least amount of code possible to do something meaningful.
+
+Notes
+-----
+
+Running
+-------
+
+This project is written in scala and uses SBT. With scala and SBT installed,
+you can run the tests by executing: `sbt test`
+
+References
+----------
+
+* http://code.google.com/p/simple-build-tool/[SBT]
+* http://www.scala-lang.org/[Scala Language]
+
