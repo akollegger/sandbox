@@ -20,6 +20,10 @@ behavior.
 3. Place the Node at a location
 4. Look for the Node in space
 
+As I started scanning through the API, it was clear that I was walking through
+a construction site with heavy equipment. Though I just wanted to hammer a 
+nail into the wall to hang a picture. 
+
 Challenges started with identifying the minimal required dependencies and
 repositories. The link:SpatialTrial/project/build/SpatialTrialProject.scala[]
 sbt project file is the result. 
