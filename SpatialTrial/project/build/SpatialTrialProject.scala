@@ -3,15 +3,8 @@ import sbt._
 class SpatialTrialProject(info: ProjectInfo) extends DefaultProject(info)
 {
   //
-  // Configuration
-  //
-//  override def compileOptions = super.compileOptions ++
-//      Seq(Verbose)
-
-  //
   // Repositories
   //
-  //  val ScargRepo = "scarg-repo" at "http://xfire.github.com/scarg/maven-repo/"
   val Neo4jRepo = "neo4j-public" at "http://m2.neo4j.org"
   val GeoTools = "geotools-repo" at "http://download.osgeo.org/webdav/geotools"
   val JavaDevNet = "java-dev-net" at "http://download.java.net/maven/2/" // required for jsr-275
@@ -22,6 +15,7 @@ class SpatialTrialProject(info: ProjectInfo) extends DefaultProject(info)
   val NEO4J_VERSION = "1.3.M02"
   val NEO4J_SPATIAL_VERSION = "0.3-SNAPSHOT"
   val GEOTOOLS_VERSION = "2.7-M3"
+
   //
   // Dependencies
   //
@@ -34,6 +28,7 @@ class SpatialTrialProject(info: ProjectInfo) extends DefaultProject(info)
   val jts_model = "com.vividsolutions" % "jts" % "1.11"
 
   // required to create a Layer (marked as "provided?")
+  // Too many required dependencies of neo4j-spatial are marked as provided.
   val geotools = "org.geotools" % "gt-main" % GEOTOOLS_VERSION
 
 }
