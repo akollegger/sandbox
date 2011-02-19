@@ -4,14 +4,15 @@ import scala.collection.JavaConversions._
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
+import org.neo4j.gis.spatial.encoders.{SimplePointEncoder, SimplePropertyEncoder}
+import org.neo4j.gis.spatial.{EditableLayerImpl, SpatialDatabaseService}
 
 // Neo4j Test-friendly graph database
 import org.neo4j.kernel.ImpermanentGraphDatabase
 
 // Neo4j Spatial
-import org.neo4j.gis.spatial.SpatialDatabaseService
 import org.neo4j.gis.spatial.query.SearchWithinDistance
-import org.neo4j.gis.spatial.encoders.SimplePropertyEncoder // to set the bounding box property "bbox"
+// to set the bounding box property "bbox"
 
 // 3rd-party geospatial
 import com.vividsolutions.jts.geom.Point // a simple geometry for a location
@@ -88,6 +89,44 @@ class Neo4jSpatialSpec extends WordSpec with MustMatchers {
       val withinDistance: Double = 100.0
       val searchQuery = new SearchWithinDistance(searchFromPoint, withinDistance)
       spatialIndex.executeSearch(searchQuery);
+
+      // where are my results? back in the query
+      val searchResults = searchQuery.getResults
+
+      searchResults must not be ('empty)
+      searchResults must have length(1)
+      val foundSpatialNode = searchResults.head
+      foundSpatialNode.getProperty("name") must equal(nameOfPoi)
+
+      tempGraphDb.shutdown
+    }
+
+    "find a Node located within a distance from a starting coordinate using a specific geometry encoder" in {
+      val tempGraphDb = new ImpermanentGraphDatabase()
+      val spatial = new SpatialDatabaseService(tempGraphDb) // augments graph with spatial ability
+      val layer = spatial.createLayer("points of interest", classOf[SimplePointEncoder], classOf[EditableLayerImpl], "lon:lat") // a context for spatial operations
+      val geometryFactory = new GeometryFactory             // for creating points from coordinates
+
+      // add a location annotated node
+      val tx = tempGraphDb.beginTx
+      val poiNode = tempGraphDb.createNode
+      val latitude = 42.01
+      poiNode.setProperty("lat", latitude)
+      val longitude = 1.61803
+      poiNode.setProperty("lon", longitude)
+      // also, the bounding box property, named "bbox" (still needed?)
+      val bboxEncoder = new SimplePropertyEncoder()
+      bboxEncoder.encodeEnvelope(new Envelope(latitude, latitude, longitude, longitude), poiNode)
+      val nameOfPoi = "really interesting point"
+      poiNode.setProperty("name", nameOfPoi) // a non-spatial property
+      layer.add(poiNode)
+      tx.success
+
+      val searchFromCoordinate = new Coordinate(0.0, 0.0)
+      val searchFromPoint = geometryFactory.createPoint(searchFromCoordinate)
+      val withinDistance = 100.0
+      val searchQuery = new SearchWithinDistance(searchFromPoint, withinDistance)
+      layer.getIndex.executeSearch(searchQuery);
 
       // where are my results? back in the query
       val searchResults = searchQuery.getResults
